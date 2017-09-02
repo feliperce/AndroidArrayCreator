@@ -5,6 +5,9 @@
  */
 package arraycreator;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author felipe
@@ -16,6 +19,10 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        pack();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -35,6 +42,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Android ArrayCreator");
 
         jLabel1.setText("Array Name:");
 
@@ -52,6 +60,11 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(arrayItensTextArea);
 
         jButton1.setText("GENERATE!");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,6 +108,19 @@ public class MainFrame extends javax.swing.JFrame {
     private void arrayNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arrayNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_arrayNameTextFieldActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(!arrayItensTextArea.getText().isEmpty()) {
+            String[] results = arrayItensTextArea.getText().split("\n");
+            ResultForm form = new ResultForm();
+            form.setName(arrayNameTextField.getText());
+            form.setResults(results);
+            form.setVisible(true);
+            form.setResultTextArea();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please, enter the itens", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
